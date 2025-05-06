@@ -12,9 +12,5 @@ pkg_check_modules(SDL2 REQUIRED sdl2)
 include_directories(${SDL2_INCLUDE_DIRS})
 link_directories(${SDL2_LIBRARY_DIRS})
 
-# Define executable and link against libraries
-add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME}
-    ${SDL2_LIBRARIES}
-)
-install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+include_directories(${CMAKE_SOURCE_DIR}/inc)
+add_subdirectory(${CMAKE_SOURCE_DIR}/src)
