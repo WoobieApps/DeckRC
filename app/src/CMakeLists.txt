@@ -1,5 +1,6 @@
 set(SOURCES
     main.cpp
+    Logger.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
