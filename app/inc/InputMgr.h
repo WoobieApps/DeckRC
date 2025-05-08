@@ -18,7 +18,7 @@ class InputMgr
         
         bool InitSDL();
         bool InitGameController();
-        
+        void PollEvents();
     private:
         SDLGameControllerPtr m_GameController;
 };
