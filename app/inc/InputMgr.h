@@ -15,7 +15,6 @@ namespace Input
         }
     };
 
-
     using InputMgrPtr = std::shared_ptr<InputMgr>;
     using SDLGameControllerPtr = std::unique_ptr<SDL_GameController, SDLGameControllerDeleter>;
 
@@ -27,20 +26,20 @@ namespace Input
         bool button_Y{false};
         bool button_LB{false};
         bool button_RB{false};
-        bool button_LStcik{false};
-        bool button_RStcik{false};
+        bool button_LStick{false};
+        bool button_RStick{false};
         bool button_DPadUp{false};
         bool button_DPadDown{false};
         bool button_DPadLeft{false};
         bool button_DPadRight{false};
         bool button_Start{false};
         bool button_Select{false};
-        int axis_LeftX{0};
-        int axis_LeftY{0};
-        int axis_RightX{0};
-        int axis_RightY{0};
-        int axis_LeftTrigger{0};
-        int axis_RightTrigger{0};
+        int axis_LStickX{0};
+        int axis_LStickY{0};
+        int axis_RStickX{0};
+        int axis_RStickY{0};
+        int axis_LTrigger{0};
+        int axis_RTrigger{0};
     };
 
     class InputMgr

@@ -109,10 +109,10 @@ void Input::InputMgr::HandleButton(uint8_t button, bool isPressed)
             m_InputStates.button_RB = isPressed;
             break;
         case SDL_CONTROLLER_BUTTON_LEFTSTICK:
-            m_InputStates.button_LStcik = isPressed;
+            m_InputStates.button_LStick = isPressed;
             break;
         case SDL_CONTROLLER_BUTTON_RIGHTSTICK:
-            m_InputStates.button_RStcik = isPressed;
+            m_InputStates.button_RStick = isPressed;
             break;
         case SDL_CONTROLLER_BUTTON_DPAD_UP:
             m_InputStates.button_DPadUp = isPressed;
@@ -172,12 +172,12 @@ void Input::InputMgr::HandleAnalogInput()
     int correctedRightY{abs(readRightY) < Input::k_JoystickDeadzoone ? 0 : readRightY};
 
     std::lock_guard<std::mutex> lock(m_InputStatesMutex);
-    m_InputStates.axis_LeftX = correctedLeftX;
-    m_InputStates.axis_LeftY = correctedLeftY;
-    m_InputStates.axis_RightX = correctedRightX;
-    m_InputStates.axis_RightY = correctedRightY;
-    m_InputStates.axis_LeftTrigger = readLeftTrigger;
-    m_InputStates.axis_RightTrigger = readRightTrigger;
+    m_InputStates.axis_LStickX = correctedLeftX;
+    m_InputStates.axis_LStickY = correctedLeftY;
+    m_InputStates.axis_RStickX = correctedRightX;
+    m_InputStates.axis_RStickY = correctedRightY;
+    m_InputStates.axis_LTrigger = readLeftTrigger;
+    m_InputStates.axis_RTrigger = readRightTrigger;
 }
 
 Input::InputStates Input::InputMgr::GetInputStates()
