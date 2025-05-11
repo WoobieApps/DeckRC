@@ -25,3 +25,26 @@ std::string getTimestampNow()
         
     return std::string(buffer);
 }
+
+void LOG(LogLevel level, const char* levelStr, const char* func, const char* fmt, ...)
+{
+    if (level <= k_LogLevel) 
+    {
+        va_list args;
+        va_start(args, fmt);
+        
+        // Format timestamp and header first
+        printf("[%s][%s][%lx] %s:%d: ",
+            getTimestampNow().c_str(),
+            levelStr,
+            std::hash<std::thread::id>{}(std::this_thread::get_id()),
+            func,
+            __LINE__);
+            
+        // Then format the actual message
+        vprintf(fmt, args);
+        printf("\n");
+        
+        va_end(args); 
+    }
+}

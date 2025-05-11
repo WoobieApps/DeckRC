@@ -1,14 +1,26 @@
 #pragma once
 #include <cstdio>
 #include <string>
+#include <thread>
+#include <cstdarg>
 
 std::string getTimestampNow();
 
-#define LOG(level, fmt, ...) \
-        std::printf("%s [%s] %s:%d: " fmt "\n", \
-        getTimestampNow().c_str(), level, __FUNCTION__, __LINE__, ##__VA_ARGS__);
+// Define log levels
+enum class LogLevel {
+    DISABLED = -1,
+	ERR = 0,
+	WRN = 1,
+	INF = 2,
+	DBG = 3
+};
+    
+// Set current log level - change this to filter logs
+const LogLevel k_LogLevel{ LogLevel::INF };
 
-#define LOG_INF(fmt, ...) LOG("INF", fmt, ##__VA_ARGS__)
-#define LOG_DBG(fmt, ...) LOG("DBG", fmt, ##__VA_ARGS__)
-#define LOG_WRN(fmt, ...) LOG("WRN", fmt, ##__VA_ARGS__)
-#define LOG_ERR(fmt, ...) LOG("ERR", fmt, ##__VA_ARGS__)
+void LOG(LogLevel level, const char* levelStr, const char* func, const char* fmt, ...); 
+
+#define LOG_ERR(fmt, ...) LOG(LogLevel::ERR, "ERR", __FUNCTION__, fmt, ##__VA_ARGS__)
+#define LOG_WRN(fmt, ...) LOG(LogLevel::WRN, "WRN", __FUNCTION__, fmt, ##__VA_ARGS__)
+#define LOG_INF(fmt, ...) LOG(LogLevel::INF, "INF", __FUNCTION__, fmt, ##__VA_ARGS__)
+#define LOG_DBG(fmt, ...) LOG(LogLevel::DBG, "DBG", __FUNCTION__, fmt, ##__VA_ARGS__)
