@@ -2,17 +2,7 @@ app-id: org.deckrc.remotectrl
 runtime: org.freedesktop.Platform
 runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Locale
 command: DeckRC
-
-modules:
-  - name: app
-    buildsystem: cmake-ninja
-    sources:
-      - type: dir
-        path: ./app
-
 finish-args:
   - --share=ipc
   - --socket=wayland
@@ -21,5 +11,26 @@ finish-args:
   - --device=dri
   - --device=input
   - --talk-name=org.freedesktop.UDev
-  - --filesystem=host:ro
+  - --filesystem=home
   - --socket=pulseaudio
+
+modules:
+  - name: wxwidgets
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/wxWidgets/wxWidgets.git
+        tag: v3.2.4
+    config-opts:
+      - -DwxUSE_QT=OFF
+      - -DwxUSE_GTK=ON
+      - -DwxBUILD_SAMPLES=OFF
+      - -DwxBUILD_DEMOS=OFF
+      - -DwxBUILD_TESTS=OFF
+
+  - name: DeckRC
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: dir
+        path: app

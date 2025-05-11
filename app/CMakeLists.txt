@@ -12,5 +12,9 @@ pkg_check_modules(SDL2 REQUIRED sdl2)
 include_directories(${SDL2_INCLUDE_DIRS})
 link_directories(${SDL2_LIBRARY_DIRS})
 
+# WxWidgets
+find_package(wxWidgets REQUIRED COMPONENTS core base)
+include(${wxWidgets_USE_FILE})
+
 include_directories(${CMAKE_SOURCE_DIR}/inc)
 add_subdirectory(${CMAKE_SOURCE_DIR}/src)
