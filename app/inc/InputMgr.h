@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SDL2/SDL.h>
 #include <memory>
 #include <mutex>
@@ -42,6 +44,36 @@ namespace Input
         int axis_RTrigger{0};
     };
 
+    enum class AxisInputs
+    {
+        L_STICK_X,
+        L_STICK_Y,
+        R_STICK_X,
+        R_STICK_Y,
+        L_TRIGGER,
+        R_TRIGGER,
+        AXIS_COUNT
+    };
+
+    enum class ButtonInputs
+    {
+        A,
+        B,
+        X,
+        Y,
+        LB,
+        RB,
+        L_STICK,
+        R_STICK,
+        DPAD_UP,
+        DPAD_DOWN,
+        DPAD_LEFT,
+        DPAD_RIGHT,
+        START,
+        SELECT,
+        BUTTON_COUNT
+    };
+
     class InputMgr
     {
         public:
@@ -49,6 +81,8 @@ namespace Input
             static InputMgrPtr GetInstance();
             void FetchInput();
             InputStates GetInputStates();
+            int GetAxisValue(AxisInputs axis);
+            bool GetButtonState(ButtonInputs button);
 
             InputMgr(const InputMgr&) = delete;
             InputMgr& operator=(const InputMgr&) = delete;

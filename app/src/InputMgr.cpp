@@ -186,3 +186,65 @@ Input::InputStates Input::InputMgr::GetInputStates()
     std::lock_guard<std::mutex> lock(m_InputStatesMutex);
     return m_InputStates;
 }
+
+int Input::InputMgr::GetAxisValue(Input::AxisInputs axis)
+{
+    std::lock_guard<std::mutex> lock(m_InputStatesMutex);
+    switch (axis)
+    {
+        case AxisInputs::L_STICK_X:
+            return m_InputStates.axis_LStickX;
+        case AxisInputs::L_STICK_Y:
+            return m_InputStates.axis_LStickY;
+        case AxisInputs::R_STICK_X:
+            return m_InputStates.axis_RStickX;
+        case AxisInputs::R_STICK_Y:
+            return m_InputStates.axis_RStickY;
+        case AxisInputs::L_TRIGGER:
+            return m_InputStates.axis_LTrigger;
+        case AxisInputs::R_TRIGGER:
+            return m_InputStates.axis_RTrigger;
+        default:
+            LOG_ERR("Unknown axis requested: %d", static_cast<int>(axis));
+            return -1;
+    }
+}
+
+bool Input::InputMgr::GetButtonState(Input::ButtonInputs button)
+{
+    std::lock_guard<std::mutex> lock(m_InputStatesMutex);
+    switch (button)
+    {
+        case ButtonInputs::A:
+            return m_InputStates.button_A;
+        case ButtonInputs::B:
+            return m_InputStates.button_B;
+        case ButtonInputs::X:
+            return m_InputStates.button_X;
+        case ButtonInputs::Y:
+            return m_InputStates.button_Y;
+        case ButtonInputs::LB:
+            return m_InputStates.button_LB;
+        case ButtonInputs::RB:
+            return m_InputStates.button_RB;
+        case ButtonInputs::L_STICK:
+            return m_InputStates.button_LStick;
+        case ButtonInputs::R_STICK:
+            return m_InputStates.button_RStick;
+        case ButtonInputs::DPAD_UP:
+            return m_InputStates.button_DPadUp;
+        case ButtonInputs::DPAD_DOWN:
+            return m_InputStates.button_DPadDown;
+        case ButtonInputs::DPAD_LEFT:
+            return m_InputStates.button_DPadLeft;
+        case ButtonInputs::DPAD_RIGHT:
+            return m_InputStates.button_DPadRight;
+        case ButtonInputs::START:
+            return m_InputStates.button_Start;
+        case ButtonInputs::SELECT:
+            return m_InputStates.button_Select;
+        default:
+            LOG_ERR("Unknown button requested: %d", static_cast<int>(button));
+            return false;
+    }
+}

@@ -16,7 +16,7 @@ enum class LogLevel {
 };
     
 // Set current log level - change this to filter logs
-const LogLevel k_LogLevel{ LogLevel::ERR };
+const LogLevel k_LogLevel{ LogLevel::DBG };
 
 void LOG(LogLevel level, const char* levelStr, const char* file, int line, const char* fmt, ...); 
 
