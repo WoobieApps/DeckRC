@@ -83,6 +83,7 @@ void Input::InputMgr::FetchInput()
 {
     PollEvents();
     HandleAnalogInput();
+    LOG_DBG("Input fetched successfully.");
 }
 
 void Input::InputMgr::HandleButton(uint8_t button, bool isPressed)

@@ -26,7 +26,7 @@ std::string getTimestampNow()
     return std::string(buffer);
 }
 
-void LOG(LogLevel level, const char* levelStr, const char* func, const char* fmt, ...)
+void LOG(LogLevel level, const char* levelStr, const char* file, int line, const char* fmt, ...)
 {
     if (level <= k_LogLevel) 
     {
@@ -34,12 +34,12 @@ void LOG(LogLevel level, const char* levelStr, const char* func, const char* fmt
         va_start(args, fmt);
         
         // Format timestamp and header first
-        printf("[%s][%s][%lx] %s:%d: ",
+        printf("[%s][%s][%lx] %s:%d : ",
             getTimestampNow().c_str(),
             levelStr,
             std::hash<std::thread::id>{}(std::this_thread::get_id()),
-            func,
-            __LINE__);
+            file,
+            line);
             
         // Then format the actual message
         vprintf(fmt, args);

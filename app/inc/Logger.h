@@ -16,11 +16,11 @@ enum class LogLevel {
 };
     
 // Set current log level - change this to filter logs
-const LogLevel k_LogLevel{ LogLevel::INF };
+const LogLevel k_LogLevel{ LogLevel::ERR };
 
-void LOG(LogLevel level, const char* levelStr, const char* func, const char* fmt, ...); 
+void LOG(LogLevel level, const char* levelStr, const char* file, int line, const char* fmt, ...); 
 
-#define LOG_ERR(fmt, ...) LOG(LogLevel::ERR, "ERR", __FUNCTION__, fmt, ##__VA_ARGS__)
-#define LOG_WRN(fmt, ...) LOG(LogLevel::WRN, "WRN", __FUNCTION__, fmt, ##__VA_ARGS__)
-#define LOG_INF(fmt, ...) LOG(LogLevel::INF, "INF", __FUNCTION__, fmt, ##__VA_ARGS__)
-#define LOG_DBG(fmt, ...) LOG(LogLevel::DBG, "DBG", __FUNCTION__, fmt, ##__VA_ARGS__)
+#define LOG_ERR(fmt, ...) LOG(LogLevel::ERR, "ERR", __FILE_NAME__, __LINE__,fmt, ##__VA_ARGS__)
+#define LOG_WRN(fmt, ...) LOG(LogLevel::WRN, "WRN", __FILE_NAME__, __LINE__,fmt, ##__VA_ARGS__)
+#define LOG_INF(fmt, ...) LOG(LogLevel::INF, "INF", __FILE_NAME__, __LINE__,fmt, ##__VA_ARGS__)
+#define LOG_DBG(fmt, ...) LOG(LogLevel::DBG, "DBG", __FILE_NAME__, __LINE__,fmt, ##__VA_ARGS__)

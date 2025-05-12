@@ -2,6 +2,7 @@ set(SOURCES
     main.cpp
     Logger.cpp
     InputMgr.cpp
+    App.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
